@@ -1,14 +1,19 @@
 import { Link } from '@tanstack/react-router';
-import { BookOpen, Heart, UserRound, Store, ArrowUpRight, ArrowRight, CalendarDays, Clock, Check, Sun, Mail, ChevronRight } from 'lucide-react';
+import { BookOpen, Heart, UserRound, Store, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { sections } from '@/lib/tatapp-data';
 import { useDemo } from './store';
 const icons={book:BookOpen,heart:Heart,user:UserRound,shop:Store};
-export function HomeScreen(){const {state,update}=useDemo();const pending=state.tasks.filter(t=>!t.done);return <>
- <div className="page-intro"><div><div className="today-label"><Sun size={19}/> Jueves 15 de octubre de 2026 <span>· Ejemplo</span></div><h1>Hola, {state.name}<span className="greeting-dot">.</span></h1><p>Qué bueno verte. ¿Qué necesitas hacer hoy?</p></div><div className="welcome-symbol" aria-hidden="true"><Sun/></div></div>
- <div className="section-heading"><h2>Todo lo que necesitas, a mano</h2><span>Tu espacio personal</span></div>
- <div className="module-grid">{sections.map(section=>{const Icon=icons[section.icon];return <Link key={section.path} to={section.path} className={`module-card ${section.tone}`}><div className="module-top"><span className="module-icon"><Icon strokeWidth={1.6}/></span><ArrowUpRight className="module-arrow"/></div><h2>{section.title}</h2><p>{section.description}</p><div className="module-tags">{section.links.map(label=><span key={label}>{label}</span>)}</div><div className="module-bottom"><span>{section.path==='/libreta'?`${pending.length} pendientes`:section.path==='/salud'?'1 próxima hora médica':section.path==='/mi-informacion'?'Tus datos siempre a mano':'Descubre tus servicios'}</span><ArrowRight size={20}/></div></Link>})}</div>
- <div className="section-heading upcoming-heading"><h2>Citas y recordatorios</h2><Button asChild variant="link"><Link to="/notificaciones">Ver todos <ArrowRight/></Link></Button></div>
- <div className="reminder-list"><Link to="/salud" className="appointment-row"><div className="date-tile"><span>OCT</span><strong>19</strong></div><div className="reminder-copy"><span className="eyebrow">PRÓXIMA HORA MÉDICA · EJEMPLO</span><h3>Consulta de medicina general</h3><p><Clock size={16}/> Lunes, 10:30 <span className="text-separator">·</span> Clínica de ejemplo</p></div><ChevronRight/></Link>{pending.slice(0,1).map(task=><div className="task-preview" key={task.id}><Button variant="outline" size="icon" aria-label={`Completar: ${task.title}`} onClick={()=>update(s=>({...s,tasks:s.tasks.map(t=>t.id===task.id?{...t,done:true}:t)}))}><Check/></Button><div><span className="eyebrow">MI LIBRETA</span><p>{task.title}</p></div><Button asChild variant="ghost" size="icon" aria-label="Ver libreta"><Link to="/libreta"><ArrowRight/></Link></Button></div>)}</div>
- <div className="message-banner"><div className="message-banner-icon"><Mail/></div><div><h3>Mensajes importantes</h3><p>Tienes {4-state.readMessages.length} mensajes de ejemplo por leer.</p></div><Button asChild variant="outline"><Link to="/mensajes">Ver mensajes <ArrowRight/></Link></Button></div>
+export function HomeScreen(){const {state,update}=useDemo();const pending=state.tasks.filter(t=>!t.done);const unread=4-state.readMessages.length;
+ const status=(path:string)=>path==='/libreta'?`${pending.length} pendientes`:path==='/salud'?'1 hora médica próxima':null;
+ return <>
+  <div className="home-greeting"><p className="home-date">Jueves 15 de octubre</p><h1>Hola, {state.name}</h1><p>¿Qué necesitas hacer hoy?</p></div>
+  <h2 className="home-section-title">Tus secciones</h2>
+  <div className="module-grid">{sections.map(section=>{const Icon=icons[section.icon];const s=status(section.path);return <Link key={section.path} to={section.path} className="module-card"><Icon className="module-icon" strokeWidth={1.7} aria-hidden="true"/><h2>{section.title}</h2><p>{section.description}</p>{s&&<span className="module-status">{s}</span>}</Link>})}</div>
+  <div className="home-section-row"><h2 className="home-section-title">Próximos días</h2><Link to="/libreta" className="text-link">Ver mi libreta</Link></div>
+  <ul className="agenda">
+   <li><Link to="/salud" className="agenda-item"><span className="agenda-date"><strong>19</strong>oct</span><span className="agenda-copy"><strong>Consulta de medicina general</strong><span>Lunes 10:30 · Clínica de ejemplo</span></span></Link></li>
+   {pending.slice(0,2).map(task=><li key={task.id} className="agenda-item"><span className="agenda-date"><strong>{task.date.slice(8)}</strong>oct</span><span className="agenda-copy"><strong>{task.title}</strong><span>Pendiente en tu libreta</span></span><Button variant="outline" className="agenda-done" aria-label={`Marcar como hecho: ${task.title}`} onClick={()=>update(s=>({...s,tasks:s.tasks.map(t=>t.id===task.id?{...t,done:true}:t)}))}><Check/>Hecho</Button></li>)}
+  </ul>
+  <div className="message-strip"><div><h2>Mensajes importantes</h2><p>{unread>0?`Tienes ${unread} mensajes por leer.`:'Leíste todos tus mensajes.'}</p></div><Button asChild><Link to="/mensajes">Leer mensajes</Link></Button></div>
  </>}
