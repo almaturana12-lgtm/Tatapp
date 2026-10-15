@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as ConfiguracionRouteImport } from './routes/configuracion'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as LibretaRouteImport } from './routes/libreta'
+import { Route as MensajesRouteImport } from './routes/mensajes'
+import { Route as MiInformacionRouteImport } from './routes/mi-informacion'
+import { Route as NotificacionesRouteImport } from './routes/notificaciones'
+import { Route as SaludRouteImport } from './routes/salud'
+import { Route as ServiciosRouteImport } from './routes/servicios'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuscarRoute = BuscarRouteImport.update({
+  id: '/buscar',
+  path: '/buscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracionRoute = ConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibretaRoute = LibretaRouteImport.update({
+  id: '/libreta',
+  path: '/libreta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MensajesRoute = MensajesRouteImport.update({
+  id: '/mensajes',
+  path: '/mensajes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MiInformacionRoute = MiInformacionRouteImport.update({
+  id: '/mi-informacion',
+  path: '/mi-informacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificacionesRoute = NotificacionesRouteImport.update({
+  id: '/notificaciones',
+  path: '/notificaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SaludRoute = SaludRouteImport.update({
+  id: '/salud',
+  path: '/salud',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosRoute = ServiciosRouteImport.update({
+  id: '/servicios',
+  path: '/servicios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/favoritos': typeof FavoritosRoute
+  '/libreta': typeof LibretaRoute
+  '/mensajes': typeof MensajesRoute
+  '/mi-informacion': typeof MiInformacionRoute
+  '/notificaciones': typeof NotificacionesRoute
+  '/salud': typeof SaludRoute
+  '/servicios': typeof ServiciosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/favoritos': typeof FavoritosRoute
+  '/libreta': typeof LibretaRoute
+  '/mensajes': typeof MensajesRoute
+  '/mi-informacion': typeof MiInformacionRoute
+  '/notificaciones': typeof NotificacionesRoute
+  '/salud': typeof SaludRoute
+  '/servicios': typeof ServiciosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buscar': typeof BuscarRoute
+  '/configuracion': typeof ConfiguracionRoute
+  '/favoritos': typeof FavoritosRoute
+  '/libreta': typeof LibretaRoute
+  '/mensajes': typeof MensajesRoute
+  '/mi-informacion': typeof MiInformacionRoute
+  '/notificaciones': typeof NotificacionesRoute
+  '/salud': typeof SaludRoute
+  '/servicios': typeof ServiciosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/buscar'
+    | '/configuracion'
+    | '/favoritos'
+    | '/libreta'
+    | '/mensajes'
+    | '/mi-informacion'
+    | '/notificaciones'
+    | '/salud'
+    | '/servicios'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/buscar'
+    | '/configuracion'
+    | '/favoritos'
+    | '/libreta'
+    | '/mensajes'
+    | '/mi-informacion'
+    | '/notificaciones'
+    | '/salud'
+    | '/servicios'
+  id:
+    | '__root__'
+    | '/'
+    | '/buscar'
+    | '/configuracion'
+    | '/favoritos'
+    | '/libreta'
+    | '/mensajes'
+    | '/mi-informacion'
+    | '/notificaciones'
+    | '/salud'
+    | '/servicios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscarRoute: typeof BuscarRoute
+  ConfiguracionRoute: typeof ConfiguracionRoute
+  FavoritosRoute: typeof FavoritosRoute
+  LibretaRoute: typeof LibretaRoute
+  MensajesRoute: typeof MensajesRoute
+  MiInformacionRoute: typeof MiInformacionRoute
+  NotificacionesRoute: typeof NotificacionesRoute
+  SaludRoute: typeof SaludRoute
+  ServiciosRoute: typeof ServiciosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/buscar': {
+      id: '/buscar'
+      path: '/buscar'
+      fullPath: '/buscar'
+      preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracion': {
+      id: '/configuracion'
+      path: '/configuracion'
+      fullPath: '/configuracion'
+      preLoaderRoute: typeof ConfiguracionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/libreta': {
+      id: '/libreta'
+      path: '/libreta'
+      fullPath: '/libreta'
+      preLoaderRoute: typeof LibretaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mensajes': {
+      id: '/mensajes'
+      path: '/mensajes'
+      fullPath: '/mensajes'
+      preLoaderRoute: typeof MensajesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mi-informacion': {
+      id: '/mi-informacion'
+      path: '/mi-informacion'
+      fullPath: '/mi-informacion'
+      preLoaderRoute: typeof MiInformacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notificaciones': {
+      id: '/notificaciones'
+      path: '/notificaciones'
+      fullPath: '/notificaciones'
+      preLoaderRoute: typeof NotificacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salud': {
+      id: '/salud'
+      path: '/salud'
+      fullPath: '/salud'
+      preLoaderRoute: typeof SaludRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios': {
+      id: '/servicios'
+      path: '/servicios'
+      fullPath: '/servicios'
+      preLoaderRoute: typeof ServiciosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscarRoute: BuscarRoute,
+  ConfiguracionRoute: ConfiguracionRoute,
+  FavoritosRoute: FavoritosRoute,
+  LibretaRoute: LibretaRoute,
+  MensajesRoute: MensajesRoute,
+  MiInformacionRoute: MiInformacionRoute,
+  NotificacionesRoute: NotificacionesRoute,
+  SaludRoute: SaludRoute,
+  ServiciosRoute: ServiciosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
