@@ -29,4 +29,4 @@ export const searchItems = [
  {title:'Mensajes importantes',category:'Mensajes',path:'/mensajes',keywords:'correo mensaje clínica documento'},
  {title:'Servicios útiles y mapa',category:'Servicios',path:'/servicios',keywords:'mapa servicio oferta pedido'},
 ] as const;
-export function findResults(query:string) { const normalize=(text:string)=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' '); const words=normalize(query).split(/\s+/).filter(w=>w.length>3); return searchItems.filter(item=>words.some(w=>normalize(`${item.title} ${item.keywords}`).includes(w))); }
+export function findResults(query:string) { const normalize=(text:string)=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9 ]/g,' '); const words=normalize(query).split(/\s+/).filter(w=>w.length>3||w==='afp'); return searchItems.filter(item=>words.some(w=>normalize(`${item.title} ${item.keywords}`).includes(w))); }
